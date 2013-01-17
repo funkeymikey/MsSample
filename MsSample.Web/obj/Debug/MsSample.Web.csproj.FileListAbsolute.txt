@@ -1,0 +1,5 @@
+C:\dev\MsSample\MsSample.Web\bin\MsSample.Web.dll
+C:\dev\MsSample\MsSample.Web\bin\MsSample.Web.pdb
+C:\dev\MsSample\MsSample.Web\obj\Debug\MsSample.Web.csprojResolveAssemblyReference.cache
+C:\dev\MsSample\MsSample.Web\obj\Debug\MsSample.Web.dll
+C:\dev\MsSample\MsSample.Web\obj\Debug\MsSample.Web.pdb
