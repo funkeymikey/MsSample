@@ -1,4 +1,6 @@
 ﻿using System.Collections.Generic;
+using System.Net;
+using System.Net.Http;
 using System.Web.Http;
 using MsSample.Core;
 
@@ -9,9 +11,12 @@ namespace MsSample.Api.Controllers
         public RestaurantsManager _manager = new RestaurantsManager();
 
         // GET api/values
-        public IEnumerable<Restaurant> Get()
+        public HttpResponseMessage Get()
         {
-            return _manager.GetRestaurants();
+            IEnumerable<Restaurant> restaurants = _manager.GetRestaurants(); ;
+            HttpResponseMessage response = Request.CreateResponse<IEnumerable<Restaurant>>(HttpStatusCode.OK, restaurants);
+            response.Headers.Add("Access-Control-Allow-Origin", "*"); //to allow the request to be used from other domains
+            return response;
         }
 
         // GET api/values/5

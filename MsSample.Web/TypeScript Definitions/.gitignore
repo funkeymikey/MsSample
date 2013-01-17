@@ -1,0 +1,16 @@
+*.dll
+*.exe
+*.pdb
+*.suo
+*.js
+*.user
+*.cache
+*.cs
+*.sln
+*.csproj
+*.txt
+*.map
+*.swp
+.DS_Store
+
+_Resharper.DefinitelyTyped

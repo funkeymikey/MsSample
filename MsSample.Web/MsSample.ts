@@ -1,25 +1,20 @@
-// Interface
-interface IPoint {
-    getDist(): number;
-}
+/// <reference path="TypeScript Definitions/jquery/jquery-1.9.d.ts" />
+/// <reference path="TypeScript Definitions/angularjs/angular-1.0.d.ts" />
 
-// Module
-module Shapes {
+module MsSample {
+    
+export class Controller {
+    constructor($scope) {
+        $scope.Name = "poopykins";
 
-    // Class
-    export class Point implements IPoint {
-        // Constructor
-        constructor (public x: number, public y: number) { }
+        $scope.Restaurants = [{ Name: "one" }, { Name: "two" }];
 
-        // Instance member
-        getDist() { return Math.sqrt(this.x * this.x + this.y * this.y); }
+        $.get("http://localhost:54647/Restaurants",
+            function (data) {
+                $scope.Restaurants = data;
+            }
+        );
 
-        // Static member
-        static origin = new Point(0, 0);
     }
-
 }
-
-// Local variables
-var p: IPoint = new Shapes.Point(3, 4);
-var dist = p.getDist();
+}
