@@ -27,16 +27,20 @@ namespace MsSample.Core
         public void UpdateRestaurant(int id, Restaurant updated)
         {
             Restaurant r = _db.Restaurants.Single(rest => rest.RestaurantId == id);
-            _db.Restaurants.Remove(r);
-            _db.Restaurants.Add(updated);
+            _db.Entry(r).CurrentValues.SetValues(updated);
             _db.SaveChanges();
         }
 
         public void RemoveRestaurant(int id)
         {
-            Restaurant r = _db.Restaurants.Single(rest => rest.RestaurantId == id);
+            Restaurant r = _db.Restaurants.SingleOrDefault(rest => rest.RestaurantId == id);
             _db.Restaurants.Remove(r);
             _db.SaveChanges();
+        }
+
+        public bool HasId(int id)
+        {
+            return _db.Restaurants.Any(rest => rest.RestaurantId == id);
         }
     }
 }

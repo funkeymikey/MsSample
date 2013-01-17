@@ -1,3 +1,6 @@
 # git ignore file
 *.suo
-packages
+packages/
+bin/
+obj/
+*.user

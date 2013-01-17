@@ -10,26 +10,25 @@ namespace MsSample.Api.Controllers
     public class RestaurantsController : ApiController
     {
         private RestaurantsManager _manager = new RestaurantsManager();
-
-
+        
         // GET Restaurants
         public HttpResponseMessage Get()
         {
             IQueryable<Restaurant> restaurants = _manager.GetRestaurants();
 
-            HttpResponseMessage response = this.Request.CreateResponse<IQueryable<Restaurant>>(HttpStatusCode.OK, restaurants);
+            HttpResponseMessage response = this.Request.CreateResponse(HttpStatusCode.OK, restaurants);
             response.Headers.Add("Access-Control-Allow-Origin", "*"); //to allow the request to be used from other domains
             return response;
         }
 
         // GET Restaurants/5
-        public Restaurant Get(int id)
+        public HttpResponseMessage Get(int id)
         {
             Restaurant restuarant = _manager.GetRestaurantById(id);
             if (restuarant == null)
-                throw new HttpResponseException(HttpStatusCode.NotFound);
+                return Request.CreateResponse(HttpStatusCode.NotFound);
             else
-                return restuarant;
+                return Request.CreateResponse(HttpStatusCode.OK, restuarant);
         }
 
         // POST Restaurants
@@ -50,13 +49,20 @@ namespace MsSample.Api.Controllers
         // PUT Restaurants/5
         public void Put(int id, [FromBody]Restaurant updated)
         {
+            if (!_manager.HasId(id))
+                throw new HttpResponseException(HttpStatusCode.NotFound);
+
             _manager.UpdateRestaurant(id, updated);
         }
 
         // DELETE Restaurants/5
         public void Delete(int id)
         {
+            if (!_manager.HasId(id))
+                throw new HttpResponseException(HttpStatusCode.NotFound);
+
             _manager.RemoveRestaurant(id);
+
         }
     }
 }
