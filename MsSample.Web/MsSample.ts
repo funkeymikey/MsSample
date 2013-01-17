@@ -8,10 +8,10 @@ export class Controller {
         $scope.Name = "poopykins";
 
         $scope.Restaurants = [{ Name: "one" }, { Name: "two" }];
-
-        $.get("http://localhost:54647/Restaurants",
+        var s = $scope;
+        $.get("http://localhost/MsSample.Api/Restaurants",
             function (data) {
-                $scope.Restaurants = data;
+                s.Restaurants = data;
             }
         );
 

@@ -1,43 +1,59 @@
-﻿using System.Collections.Generic;
+﻿using MsSample.Core;
+using System;
+using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
-using MsSample.Core;
 
 namespace MsSample.Api.Controllers
 {
     public class RestaurantsController : ApiController
     {
-        public RestaurantsManager _manager = new RestaurantsManager();
+        private RestaurantsManager _manager = new RestaurantsManager();
 
-        // GET api/values
+
+        // GET Restaurants
         public HttpResponseMessage Get()
         {
-            IEnumerable<Restaurant> restaurants = _manager.GetRestaurants(); ;
-            HttpResponseMessage response = Request.CreateResponse<IEnumerable<Restaurant>>(HttpStatusCode.OK, restaurants);
+            IQueryable<Restaurant> restaurants = _manager.GetRestaurants();
+
+            HttpResponseMessage response = this.Request.CreateResponse<IQueryable<Restaurant>>(HttpStatusCode.OK, restaurants);
             response.Headers.Add("Access-Control-Allow-Origin", "*"); //to allow the request to be used from other domains
             return response;
         }
 
-        // GET api/values/5
+        // GET Restaurants/5
         public Restaurant Get(int id)
         {
-            return _manager.GetRestaurantById(id);
+            Restaurant restuarant = _manager.GetRestaurantById(id);
+            if (restuarant == null)
+                throw new HttpResponseException(HttpStatusCode.NotFound);
+            else
+                return restuarant;
         }
 
-        // POST api/values
-        public void Post([FromBody]Restaurant newRestaurant)
+        // POST Restaurants
+        public HttpResponseMessage Post([FromBody]Restaurant newRestaurant)
         {
+            if (!ModelState.IsValid)
+                throw new HttpResponseException(HttpStatusCode.BadRequest);
+            
             _manager.AddRestaurant(newRestaurant);
+
+            //build the response with the location
+            HttpResponseMessage response = this.Request.CreateResponse(HttpStatusCode.Created);
+            response.Headers.Location = new Uri(Request.RequestUri, Url.Route(null, new { id = newRestaurant.RestaurantId }));
+
+            return response;
         }
 
-        // PUT api/values/5
+        // PUT Restaurants/5
         public void Put(int id, [FromBody]Restaurant updated)
         {
             _manager.UpdateRestaurant(id, updated);
         }
 
-        // DELETE api/values/5
+        // DELETE Restaurants/5
         public void Delete(int id)
         {
             _manager.RemoveRestaurant(id);

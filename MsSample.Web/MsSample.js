@@ -11,8 +11,9 @@ var MsSample;
                     Name: "two"
                 }
             ];
-            $.get("http://localhost:54647/Restaurants", function (data) {
-                $scope.Restaurants = data;
+            var s = $scope;
+            $.get("http://localhost/MsSample.Api/Restaurants", function (data) {
+                s.Restaurants = data;
             });
         }
         return Controller;
