@@ -1,5 +1,5 @@
 ﻿<!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" ng-app>
+<html ng-app>
 <head>
     <title>Restaurants</title>
     <link href="Content/bootstrap.css" rel="stylesheet" />
@@ -9,13 +9,13 @@
     <script src="MsSample.js"></script>
 </head>
 <body>
-    <div ng-controller="MsSample.Controller">
-      <h1>Hello {{Name}}!</h1>
+    <div>
 
-        <div ng-repeat = "restaurant in Restaurants">
-            stuff ->{{restaurant.Name}}<-
-        </div>
+        <ul ng-controller="WineListCtrl">
+            <li ng-repeat="wine in wines">
+                {{ wine.Name }}
+            </li>
+        </ul>
     </div>
-
 </body>
 </html>
