@@ -1,4 +1,5 @@
-﻿using System.Web;
+﻿using System;
+using System.Web;
 using System.Web.Http;
 
 namespace MsSample.Api
@@ -15,7 +16,6 @@ namespace MsSample.Api
                             routeTemplate: "{controller}/{id}",
                             defaults: new { id = RouteParameter.Optional }
                         );
-
         }
     }
 }

@@ -1,21 +1,25 @@
 ﻿<!DOCTYPE html>
-<html ng-app>
+<html ng-app="Restaurants">
 <head>
     <title>Restaurants</title>
-    <link href="Content/bootstrap.css" rel="stylesheet" />
-    <script src="Scripts/angular.min.js"></script>
-    <script src="Scripts/bootstrap.min.js"></script>
-    <script src="Scripts/jquery-1.9.0.min.js"></script>
-    <script src="MsSample.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.3/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.3/angular-resource.min.js"></script>
+    <link href="Content/bootstrap.min.css" rel="stylesheet" />
+    <script src="Restaurant.js"></script>
+    <link href="Restaurant.css" rel="stylesheet" />
 </head>
-<body>
-    <div>
+<body class="well">
+    <div ng-controller="RestaurantCtrl">
 
-        <ul ng-controller="WineListCtrl">
-            <li ng-repeat="wine in wines">
-                {{ wine.Name }}
-            </li>
-        </ul>
+        <div ng-repeat="restaurant in restaurants" class="tile">
+            <h3>{{restaurant.Name}}</h3>
+            <img ng-src="{{restaurant.ImageUrl}}" alt="{{restaurant.Name}}" /><br />
+            <ul>
+                <li><a href="{{restaurant.WebsiteUrl}}">Website</a><br /></li>
+                <li><a href="https://maps.google.com/maps?q={{restaurant.Address}}">Map</a></li>
+            </ul>
+        </div>
+
     </div>
 </body>
 </html>

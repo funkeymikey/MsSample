@@ -1,0 +1,8 @@
+﻿
+.tile {
+    display: block;
+    padding-left: 1em;
+    float: left;
+    height: 250px;
+    width: 250px;
+}
