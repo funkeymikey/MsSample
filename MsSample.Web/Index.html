@@ -11,12 +11,16 @@
 <body class="well">
     <div ng-controller="RestaurantCtrl">
 
-        <div ng-repeat="restaurant in restaurants" class="tile">
-            <h3>{{restaurant.Name}}</h3>
-            <img ng-src="{{restaurant.ImageUrl}}" alt="{{restaurant.Name}}" /><br />
+        <ul class="unstyled">
+            <li ng-repeat="restaurant in restaurants">{{restaurant.RestaurantId}}) <span class="btn" ng-click="showData(restaurant.RestaurantId)">{{restaurant.Name}}</span></li>
+        </ul>
+
+        <div class="tile" ng-hide="!currentRestaurant" ng-model="currentRestaurant">
+            <h3>{{currentRestaurant.Name}}</h3>
+            <img ng-src="{{currentRestaurant.ImageUrl}}" alt="{{currentRestaurant.Name}}" /><br />
             <ul>
-                <li><a href="{{restaurant.WebsiteUrl}}">Website</a><br /></li>
-                <li><a href="https://maps.google.com/maps?q={{restaurant.Address}}">Map</a></li>
+                <li><a href="{{currentRestaurant.WebsiteUrl}}">Website</a><br /></li>
+                <li><a href="https://maps.google.com/maps?q={{currentRestaurant.Address}}">Map</a></li>
             </ul>
         </div>
 
