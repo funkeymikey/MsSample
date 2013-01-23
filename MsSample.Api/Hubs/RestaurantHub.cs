@@ -6,10 +6,10 @@ namespace MsSample.Api.Hubs
     [HubName("restaurantHub")]
     public class RestaurantHub : Hub
     {
-        public void Send(string msg)
+        public void Added()
         {
-            // Call the addMessage method on all clients            
-            Clients.All.addMessage(msg);
+            // tell all the clients to update because one has been added 
+            Clients.All.refreshList();
         }
     }
 }

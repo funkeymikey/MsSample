@@ -31,15 +31,30 @@
             </ul>
         </div>
 
+       <form class="form-horizontal" ng-model="newRestaurant">
+            <div>
+                <label class="control-label">Name </label>
+                <input type="text" ng-model="newRestaurant.Name">
+            </div>
+           <div>
+                <label class="control-label">ImageUrl </label>
+                <input type="text" ng-model="newRestaurant.ImageUrl">
+            </div>
+           <div>
+                <label class="control-label">WebsiteUrl </label>
+                <input type="text" ng-model="newRestaurant.WebsiteUrl">
+            </div>
+           <div>
+                <label class="control-label">Address </label>
+                <input type="text" ng-model="newRestaurant.Address">
+            </div>
+
+           <button class="btn btn-primary" ng-click="saveNewRestaurant()">Save</button>
+        </form>
+
+
     </div>
 
-    <div>
-        <input type="text" id="msg" />
-        <input type="button" id="broadcast" value="broadcast" />
-
-        <ul id="messages">
-        </ul>
-    </div>
 
 </body>
 </html>

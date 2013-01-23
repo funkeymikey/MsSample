@@ -1,4 +1,6 @@
-﻿using MsSample.Core;
+﻿using Microsoft.AspNet.SignalR;
+using MsSample.Api.Hubs;
+using MsSample.Core;
 using System;
 using System.Linq;
 using System.Net;
@@ -47,6 +49,11 @@ namespace MsSample.Api.Controllers
             //build the response with the location
             HttpResponseMessage response = this.Request.CreateResponse(HttpStatusCode.Created);
             response.Headers.Location = new Uri(Request.RequestUri, Url.Route(null, new { id = newRestaurant.RestaurantId }));
+
+
+            //everybody that's connected via signalr, tell them to refresh
+            IHubContext context = GlobalHost.ConnectionManager.GetHubContext<RestaurantHub>();
+            context.Clients.All.refreshList();
 
             return response;
         }
