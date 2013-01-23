@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.Controllers;
 
+
 namespace MsSample.Api.Controllers
 {
     
@@ -18,13 +19,10 @@ namespace MsSample.Api.Controllers
         // GET Restaurants
         public HttpResponseMessage Get()
         {
+            
             IQueryable<Restaurant> restaurants = _manager.GetRestaurants();
 
             HttpResponseMessage response = this.Request.CreateResponse(HttpStatusCode.OK, restaurants);
-            //response.Headers.Add("Access-Control-Allow-Origin", "http://localhost:55186"); //to allow the request to be used from other domains
-            //response.Headers.Add("Access-Control-Allow-Headers", "Content-Type, X-Requested-With");
-            //response.Headers.Add("Access-Control-Allow-Methods", "GET, POST, OPTIONS");
-            //response.Headers.Add("Access-Control-Allow-Credentials", "true");
             return response;
         }
 
